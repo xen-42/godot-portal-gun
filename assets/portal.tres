@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[sub_resource type="Shader" id=1]
+resource_local_to_scene = true
+code = "shader_type spatial;
+render_mode unshaded;
+
+uniform sampler2D portal_texture;
+
+void fragment() {
+	ALBEDO = texture(portal_texture, vec2(1.0 - SCREEN_UV.x, SCREEN_UV.y)).rgb;
+}"
+
+[sub_resource type="ViewportTexture" id=2]
+viewport_path = NodePath("/root/EditorNode/@@580/@@581/@@589/@@591/@@595/@@599/@@600/@@601/@@617/@@618/@@627/@@628/@@6060/@@5899/@@5900/@@5901/@@5902/@@5903/Portal/Viewport")
+
+[resource]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/portal_texture = SubResource( 2 )

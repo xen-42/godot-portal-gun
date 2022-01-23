@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/portal.wav-85800361e00b20de572827bf6feee1ff.sample"
+
+[deps]
+
+source_file="res://assets/sounds/portal.wav"
+dest_files=[ "res://.import/portal.wav-85800361e00b20de572827bf6feee1ff.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

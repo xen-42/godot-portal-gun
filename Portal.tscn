@@ -1,0 +1,88 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Portal.gd" type="Script" id=1]
+[ext_resource path="res://Portal.gdshader" type="Shader" id=2]
+[ext_resource path="res://World.tres" type="Environment" id=3]
+
+[sub_resource type="OpenSimplexNoise" id=1]
+octaves = 7
+period = 14.6
+
+[sub_resource type="NoiseTexture" id=2]
+resource_local_to_scene = true
+seamless = true
+noise = SubResource( 1 )
+
+[sub_resource type="ViewportTexture" id=3]
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 2 )
+shader_param/portal_colour = Color( 0, 1, 1, 1 )
+shader_param/scale = 1.0
+shader_param/viewport_texture = SubResource( 3 )
+shader_param/noise = SubResource( 2 )
+
+[sub_resource type="ViewportTexture" id=5]
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 0.8, 1.2, 0.4 )
+
+[sub_resource type="SpatialMaterial" id=7]
+flags_unshaded = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 0, 1, 1, 1 )
+
+[sub_resource type="QuadMesh" id=8]
+material = SubResource( 7 )
+size = Vector2( 0.1, 0.1 )
+
+[sub_resource type="Gradient" id=9]
+offsets = PoolRealArray( 0, 0.993711 )
+colors = PoolColorArray( 0, 1, 0.929412, 1, 0.992157, 0.992157, 0.992157, 0 )
+
+[node name="Portal" type="Sprite3D"]
+transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0 )
+material_override = SubResource( 4 )
+double_sided = false
+texture = SubResource( 5 )
+region_enabled = true
+region_rect = Rect2( 402, 100, 220, 400 )
+script = ExtResource( 1 )
+size = Vector2( 220, 400 )
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 1024, 600 )
+msaa = 4
+keep_3d_linear = true
+
+[node name="CameraBase" type="Spatial" parent="Viewport"]
+
+[node name="Camera" type="Camera" parent="Viewport/CameraBase"]
+transform = Transform( 1, -8.74228e-08, -8.74228e-08, -8.74228e-08, -1, 0, -8.74228e-08, 7.64274e-15, -1, 0, 0, -1 )
+keep_aspect = 0
+environment = ExtResource( 3 )
+fov = 90.0
+size = 0.1
+
+[node name="Area" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+shape = SubResource( 6 )
+
+[node name="CPUParticles" type="CPUParticles" parent="."]
+transform = Transform( -1, 1.74846e-07, 1.19209e-07, 1.74846e-07, 1, -1.04216e-14, -1.19209e-07, 1.06581e-14, -1, 0, 0, 0 )
+emitting = false
+amount = 100
+one_shot = true
+explosiveness = 0.9
+mesh = SubResource( 8 )
+direction = Vector3( 0, 0, -1 )
+spread = 88.47
+gravity = Vector3( 0, 9.8, 0 )
+initial_velocity = 2.0
+initial_velocity_random = 0.2
+angle_random = 1.0
+color_ramp = SubResource( 9 )

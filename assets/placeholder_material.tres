@@ -1,0 +1,9 @@
+[gd_resource type="SpatialMaterial" load_steps=2 format=2]
+
+[sub_resource type="StreamTexture" id=1]
+flags = 19
+load_path = "res://.import/grid.png-0e5acf495abafdc7f64f9b213a44aa0e.s3tc.stex"
+
+[resource]
+albedo_texture = SubResource( 1 )
+uv1_triplanar = true
